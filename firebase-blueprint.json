@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Stream": {
+      "title": "Stream",
+      "description": "Metadata for a live video or radio stream.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["video", "radio"] },
+        "status": { "type": "string", "enum": ["live", "offline"] },
+        "creatorUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "type", "status", "creatorUid"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A message sent in a stream's live chat.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "streamId": { "type": "string" },
+        "senderUid": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "streamId", "senderUid", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/streams/{streamId}": {
+      "schema": "Stream",
+      "description": "Live stream metadata."
+    },
+    "/streams/{streamId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Chat messages for a stream."
+    }
+  }
+}

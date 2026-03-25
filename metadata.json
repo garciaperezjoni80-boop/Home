@@ -1,0 +1,5 @@
+{
+  "name": "LiveStream Hub",
+  "description": "Plataforma de transmisión en vivo para video y radio con chat en tiempo real y panel de administración.",
+  "requestFramePermissions": ["camera", "microphone"]
+}
